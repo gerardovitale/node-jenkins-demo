@@ -8,4 +8,4 @@ RUN npm install
 COPY ./src .
 
 EXPOSE 8081
-CMD [ "node", "server.js" ]
+CMD [ "npm", "start" ]
