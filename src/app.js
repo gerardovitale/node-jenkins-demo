@@ -5,8 +5,7 @@ app.use(express.json());
 
 
 app.get("/", (req, res) => {
-    return res
-        .type("application/json")
+    return res.type("application/json")
         .status(200)
         .json({result: 'Hello world!'});
 });
@@ -19,8 +18,7 @@ app.get("/date", (req, res) => {
         currentTime: time,
         currentISODate: `${date}T${time}Z`
     };
-    return res
-        .type("application/json")
+    return res.type("application/json")
         .status(200)
         .json({result: response});
 })
