@@ -1,9 +1,4 @@
-pipeline {
-    agent any
-      triggers {
-        githubPush()
-      }
-
+node {
     def commit_id
     stage('Preparation') {
      checkout scm
