@@ -16,12 +16,15 @@ describe("Test example", () => {
 
     test("GET /date", (done) => {
         const today = new Date();
+        const date = today.getFullYear() + '-' + today.getMonth() + '-' + today.getDate();
+        const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
         const expectedResponse = {
             result: {
-                currentDate: today.getFullYear() + '-' + today.getMonth() + '-' + today.getDate(),
-                currentTime: today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds()
+                currentDate: date,
+                currentTime: time,
+                currentISODate: `${date}T${time}Z`
             }
-        }
+        };
 
         request(app).get("/date")
             .expect("Content-Type", /json/)

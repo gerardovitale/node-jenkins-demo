@@ -12,14 +12,17 @@ app.get("/", (req, res) => {
 });
 app.get("/date", (req, res) => {
     const today = new Date();
-    const expectedResponse = {
-        currentDate: today.getFullYear() + '-' + today.getMonth() + '-' + today.getDate(),
-        currentTime: today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds()
+    const date = today.getFullYear() + '-' + today.getMonth() + '-' + today.getDate();
+    const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+    const response = {
+        currentDate: date,
+        currentTime: time,
+        currentISODate: `${date}T${time}Z`
     };
     return res
         .type("application/json")
         .status(200)
-        .json({result: expectedResponse});
+        .json({result: response});
 })
 
 
