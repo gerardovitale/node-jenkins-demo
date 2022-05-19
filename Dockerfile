@@ -1,11 +1,11 @@
 FROM node:latest
 
-WORKDIR /usr/src/app
+WORKDIR /app
 COPY package*.json ./
 RUN npm install
 # If you are building your code for production
 # RUN npm ci --only=production
-COPY ./src .
+COPY ./src /app/src
 
 EXPOSE 8081
 CMD [ "npm", "start" ]
