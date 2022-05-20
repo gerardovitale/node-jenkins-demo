@@ -12,7 +12,7 @@ node {
      myTestContainer.inside {
        sh 'npm ci'
        sh 'npm install --only=dev'
-       sd 'npm link'
+       sh 'npm link'
        sh 'npm test'
      }
    }
