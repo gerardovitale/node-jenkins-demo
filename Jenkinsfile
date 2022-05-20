@@ -12,7 +12,6 @@ node {
      myTestContainer.inside {
        sh 'npm ci'
        sh 'npm install --only=dev'
-       sh 'npm link'
        sh 'npm test'
      }
    }
