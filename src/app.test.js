@@ -16,17 +16,45 @@ describe("Test example", () => {
 
     test("GET /date", (done) => {
         const today = new Date();
-        const date = today.getFullYear() + '-' + today.getMonth() + '-' + today.getDate();
         const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
         const expectedResponse = {
             result: {
-                currentDate: date,
+                currentDate: today.toLocaleDateString(),
                 currentTime: time,
-                currentISODate: `${date}T${time}Z`
+                currentISODate: `${today.toLocaleDateString()}T${time}Z`
             }
         };
 
         request(app).get("/date")
+            .expect("Content-Type", /json/)
+            .expect(200)
+            .expect(expectedResponse)
+            .end((err, res) => {
+                if (err) return done(err);
+                return done();
+            });
+    })
+
+    test("GET /worldwide_clock", (done) => {
+        const date = new Date();
+        const timeOffsets = {
+            caracas: -4,
+            buenosAires: -3,
+            accra: 0,
+            london: 1,
+            madrid: 2,
+            bucharest: 3
+        };
+        const expectedResponse = {
+            result: Object.entries(timeOffsets)
+                .map((timeOffset) => {
+                    return {
+                        [timeOffset[0]]: new Date(date.getTime() + (3600000 * timeOffset[1]))
+                            .toLocaleString()
+                    }
+                })
+        }
+        request(app).get("/worldwide_clock")
             .expect("Content-Type", /json/)
             .expect(200)
             .expect(expectedResponse)
